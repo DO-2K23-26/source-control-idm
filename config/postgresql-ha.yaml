@@ -1,0 +1,32 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: postgresql
+spec:
+  destination:
+    name: ''
+    namespace: airflow
+    server: https://kubernetes.default.svc
+  source:
+    path: ''
+    repoURL: https://charts.bitnami.com/bitnami
+    targetRevision: 14.2.33
+    chart: postgresql-ha
+    helm:
+      values: |
+        global:
+          postgresql:
+            username: "postgres"
+            password: "postgrespassword"
+            database: "my_database"
+            repmgrUsername: "repmgr"
+            repmgrPassword: "replpassword"
+            repmgrDatabase: "my_database"
+          pgpool:
+            adminUsername: "postgres"
+            adminPassword: "postgrespassword"
+  project: default
+  syncPolicy:
+    automated: null
+    syncOptions:
+      - CreateNamespace=true
