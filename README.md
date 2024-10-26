@@ -31,11 +31,7 @@ helm repo add argo https://argoproj.github.io/argo-helm
 helm --version 7.6.8 -n argocd install my-argo-cd argo/argo-cd
 ```
 
-Faire un port forward du service argocd-server sur 8080:8080. 
-
-```bash
-kubectl -n argocd port-forward svc/argocd-server 8080:8080
-```
+Faire un port forward du service `argocd-server` sur 8080:8080.
 
 Accéder à l'interface ArgoCD via [https://localhost:8080](https://localhost:8080/).
 
@@ -104,11 +100,12 @@ Appliquer ce fichier pour déployer PostgreSQL HA via ArgoCD :
 kubectl apply -f postgresql-ha.yaml -n argocd
 ```
 
-Se connecter à ArgoCD via le CLI :
+Se connecter à ArgoCD via le CLI (avec les mêmes identifiants que précedemment) :
 
 ```jsx
 argocd login localhost:8080
 ```
+
 
 Synchroniser l’application PostgreSQL :
 
